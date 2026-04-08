@@ -1,8 +1,8 @@
 [
   {
-    "name": "カタン",
-    "image": "https://cf.geekdo-images.com/0.png",
-    "players": "3-4",
-    "time": "60"
+    "name": "テストゲーム",
+    "image": "https://picsum.photos/200",
+    "players": "2-4",
+    "time": "30"
   }
 ]
