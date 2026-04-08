@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Boardgames</title>
+<style>
+body { font-family: sans-serif; padding:20px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 12px;
+}
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px;
+}
+img { width: 100%; }
+</style>
+</head>
+
+<body>
+<h1>🎲 My Boardgames</h1>
+<input id="search" placeholder="検索">
+<div class="grid" id="list"></div>
+
+<script>
+fetch('games.json')
+.then(r => r.json())
+.then(data => {
+  const list = document.getElementById('list');
+  const search = document.getElementById('search');
+
+  function render(keyword="") {
+    list.innerHTML = "";
+    data
+      .filter(g => g.name.toLowerCase().includes(keyword.toLowerCase()))
+      .forEach(g => {
+        const div = document.createElement('div');
+        div.className = "card";
+        div.innerHTML = `
+          <img src="${g.image}">
+          <b>${g.name}</b><br>
+          👥 ${g.players}<br>
+          ⏱ ${g.time}分
+        `;
+        list.appendChild(div);
+      });
+  }
+
+  search.addEventListener('input', e => render(e.target.value));
+  render();
+});
+</script>
+</body>
+</html>
